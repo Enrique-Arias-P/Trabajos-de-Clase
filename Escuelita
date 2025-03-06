@@ -1,0 +1,132 @@
+create database Escuelita;
+go;
+use Escuelita
+create TABLE persona(
+   CURP CHAR(18) NOT NULL PRIMARY KEY,
+   Nombre nvarchar(50) NOT NULL,
+   Direccion NVARCHAR(100) NULL,
+   Nacimiendo DATE NOT NULL,  
+)
+CREATE TABLE Carrera (
+   Clave CHAR(13) NOT NULL PRIMARY KEY,
+   Nombre VARCHAR(60) NOT NULL,
+)
+CREATE TABLE Alumno (
+   CURP CHAR(18) NOT NULL PRIMARY KEY FOREIGN KEY REFERENCES persona(CURP),
+   NumeroDeControl CHAR(8) NOT NULL UNIQUE,
+   ClaveCarrera char (13) FOREIGN KEY REFERENCES Carrera (Clave)
+)
+
+/////////////////////////////////////
+
+
+
+
+CREATE TABLA administrativo(
+
+
+    CURP (18) NOT NULL
+    PRIMARY KEY
+    FOREINGN KEY REFERENCE  persona (CURP)
+)
+
+INSERT INTO carrera (clave, nombre)
+VALUES ("INTIC 2010-225"," Ingeneria en tecnologia de la informacion y  comunicacion" )
+select * from carrera
+
+INSERT INTO carrera (clave, nombre)
+VALUES ("INTIC 2010-224"," Ingeneria " )
+VALUES ("INTIC 2010-224"," Ingeneria " )
+
+insert into Persona (CURP, nombre, Direccion, Nacimiento)
+values ("JS20FR" ," Johanne Sacrebleu", "Por alla", " 2003-04-05" )
+
+
+insert into Persona (CURP, NumeroDeControl, CarreraClave)
+values ("JS20FR", "2017005","ITIC-2010-2025" )
+
+Select NumeroDeControl, Nombre, CarreraClave from Persona persona
+join Alumno on Persona.Curp = Alumno.CURP
+
+
+--------------------------
+
+
+alter table empleado
+   add RFC char(13) not NULL
+
+alter table empleadoç
+   add constraint RFC_unique unique (RFC)
+
+Update empleado
+   set RFC = '12345'
+   where idEmpleado = 3
+
+
+
+Select * from empleado 
+Insert into empleado (idEmpleado, nombre, sexo, rfc) values (6, "Refugio Saldivar", "CCC555")
+
+Create table Departamento(
+   idDepartamento int not null PRIMARY KEY,
+   Nombre nvarchar(30)
+)
+
+Insert into Deparamento (idDepartamento, Nombre)
+   values (1, "Ventas"), (2, "Ventas"), (3, "TIC")
+
+Select * from Deparamento
+
+
+alter table empleado
+   add TrabajaEn int NULL
+
+alter table empleado
+   add CONSTRAINT FX_empleado_departamento TrabajaEn FOREIGN key REFERENCES departamento (idDepartamento)
+
+Select * from empleado
+
+update empleado
+   set TrabajaEn = 1
+   where idEmpleado in (1, 2)
+
+update empleado
+   set TrabajaEn = 2
+   where idEmpleado in (3, 5)
+
+update empleado
+   set TrabajaEn = 3
+   where idEmpleado in (4)
+
+Select from Departamento
+   where idDepartamento = 2
+
+--Alter TABLE empleado
+  -- drop CONSTRAINT --(insertar nombre de constraint)
+
+Alter TABLE empleado
+   add CONSTRAINT FK_empleado_TrabajaEn FOREIGN KEY (TrabajaEn) REFERENCES Departamento (edDeparamento)
+      on delete set null
+
+delete from Departamento
+   where idDepartamento = 2
+
+SELECT + from empleado
+
+
+Create table Familiares (
+   Nombre nvarchar(50) not null,
+   idEmpleado int not null FOREIGN KEY  REFERENCES empleado (idEmpledo) on DELETE CASCADE
+)
+
+
+insert into Familiares (Nombre, idEmpleado)
+   values ('Gertrudis', 1), ('Daniela', 1), ('Manuel', 2)
+
+Delete from empleado
+   where idEmpleado = 1
+
+Select * from Familiares
+
+
+
