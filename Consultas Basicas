@@ -1,0 +1,125 @@
+Use northwind
+
+Select * from employees;
+Select * from products;
+Select * from suppliers;
+Select * from orders;
+Select * from [order details];
+
+select employeeid, lastname, firstname
+    from Employees
+
+select productname , unitprice
+    from Products
+
+select productname , unitprice
+    from Products
+    where ProductID = 1
+
+select productname, unitprice, CategoryID
+    from Product
+    where UnitPrice > 30
+
+select productname, unitprice, CategoryID
+    from Product
+    where UnitPrice < 30
+
+select productname, unitprice, CategoryID
+    from Product
+    where UnitPrice = 30
+
+select productname, unitprice, CategoryID
+    from Product
+    where UnitPrice >= 30
+
+select productname, unitprice, CategoryID
+    from Product
+    where UnitPrice between 30 and 40
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productid in (4, 8, 20, 55, 32)
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productid in (8)
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like 'c%' --porcentaje %
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like '%c%'
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like '%cab%'
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like '%s'
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like '_a%'
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like '___a%'
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like '[a-c]%'
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like '[a, c]%'
+
+select * from Employees
+    where region is null
+
+
+
+select productname , unitprice
+    from Products
+    where not ProductID = 1
+
+select productname, unitprice, CategoryID
+    from Product
+    where not UnitPrice > 30
+
+select productname, unitprice, CategoryID
+    from Product
+    where not UnitPrice < 30
+
+select productname, unitprice, CategoryID
+    from Product
+    where not UnitPrice = 30
+
+select productname, unitprice, CategoryID
+    from Product
+    where UnitPrice not between 30 and 40    
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like 'a%'
+    or
+    unitprice = 30
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where productname like 'a%'
+     and
+     unitprice = 30
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where unitprice = 30 or 
+        unitprice = 40
+
+select productid, productname, unitprice, CategoryID
+    from Product
+    where unitprice between 30 and 40
+        and Categoryid = 2
+
