@@ -1,0 +1,49 @@
+Use northwind
+
+-- Marzo 24 consultas de resumen o agregacion
+
+select * from Products
+
+select count (unitprice) from Products
+select max (unitprice) from Products
+select min (unitprice) from Products
+select avg (unitprice) from Products
+
+
+select categoryid, avg (unitprice) from Products
+    group by CategoryID
+    order by avg(UnitPrice) DESC
+
+
+select categoryid, avg (unitprice) as PrecioPromedio from Products
+    group by CategoryID
+    order by PrecioPromedio DESC
+
+
+select * from Products
+
+select categoryid, count(unitprice) as Cantidad from Products
+    group by CategoryID
+    order by Cantidad
+
+
+select productid, count(*) from Products
+
+select count(*) as Descontinuados from Products
+    where Discontinued = 1
+
+
+select * from [Order Details]
+
+-- orden 10250
+Select count(*) as ProductosDiferentes from [Order Details]
+    where orderid = 10250
+
+
+
+select unitprice, quantity, discount, unitprice * quantity - unitprice * discount * Quantity as PrecioConDescuento from [Order Details]
+    where OrderID = 10250
+
+
+Select sum((Unitprice * Quantity) - (UnitPrice * Discount * Quantity)) as TotalDeOrden from [Order Details]
+    where orderid = 10250

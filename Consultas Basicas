@@ -17,63 +17,63 @@ select productname , unitprice
     where ProductID = 1
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where UnitPrice > 30
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where UnitPrice < 30
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where UnitPrice = 30
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where UnitPrice >= 30
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where UnitPrice between 30 and 40
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productid in (4, 8, 20, 55, 32)
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productid in (8)
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like 'c%' --porcentaje %
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like '%c%'
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like '%cab%'
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like '%s'
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like '_a%'
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like '___a%'
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like '[a-c]%'
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like '[a, c]%'
 
 select * from Employees
@@ -86,40 +86,116 @@ select productname , unitprice
     where not ProductID = 1
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where not UnitPrice > 30
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where not UnitPrice < 30
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where not UnitPrice = 30
 
 select productname, unitprice, CategoryID
-    from Product
+    from Products
     where UnitPrice not between 30 and 40    
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like 'a%'
     or
     unitprice = 30
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where productname like 'a%'
      and
      unitprice = 30
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where unitprice = 30 or 
         unitprice = 40
 
 select productid, productname, unitprice, CategoryID
-    from Product
+    from Products
     where unitprice between 30 and 40
         and Categoryid = 2
+
+
+select productid, productname, unitprice, CategoryID
+    from Products
+        order by productname
+
+
+select productid, productname, unitprice, CategoryID, discontinued
+    from Products
+        order by categoryID, productname
+
+select productid, productname, unitprice, CategoryID, discontinued
+    from Products
+        order by categoryID, unitprice
+
+Select distinct country
+from Suppliers
+order by country
+
+Select distinct country, companyname
+from Suppliers
+order by country
+
+Select distinct country as Pais, companyname as Proveedor
+from Suppliers
+order by country
+
+Select distinct Pais = country, Proveedor = companyname
+from Suppliers
+order by country
+
+select productname, unitprice from Products
+
+select productname, PrecioNuevo = unitprice * 1.10 from Products
+
+select productname, Sabor = 'Muy rico', PrecioNuevo = unitprice * 1.10 from Products
+
+select DATEDIFF(year, birthdate, getdate()) from employees
+
+-- 18 mar
+
+-- 19 mar / consultar multiples tablas
+select * from products, categories
+
+select * from products
+    join categories on products.CategoryID = Categories.CategoryID
+
+select productID, productname, unitprice, categoryname from products
+    join categories on products.CategoryID = Categories.CategoryID
+
+select orderid, companyname from orders
+    join customers on customers.CustomerID = orders.CustomerID
+
+select orderid, lastname from Orders
+    join employees on employees.EmployeeID = orders.EmployeeID
+
+select orderid, lastname, companyname, requireddate, shippedDate, DATEDIFF(day, orderdate, ShippedDate) from Orders
+    join employees on employees.EmployeeID = orders.EmployeeID
+    join Customers on customers.CustomerID = orders.CustomerID
+    where OrderID = 10252
+
+
+select orderid, lastname, companyname, requireddate, shippedDate, DATEDIFF(day, orderdate, ShippedDate) from Orders
+    join employees on employees.EmployeeID = orders.EmployeeID
+    join Customers on customers.CustomerID = orders.CustomerID
+
+-- Sin numero negativo
+select orderid, lastname, companyname, requireddate, shippedDate, DATEDIFF(day, orderdate, ShippedDate) from Orders
+    join employees on employees.EmployeeID = orders.EmployeeID
+    join Customers on customers.CustomerID = orders.CustomerID
+
+
+-- Marzo 24 consultas de resumen o agregacion
+
+
+
 
