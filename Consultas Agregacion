@@ -47,3 +47,84 @@ select unitprice, quantity, discount, unitprice * quantity - unitprice * discoun
 
 Select sum((Unitprice * Quantity) - (UnitPrice * Discount * Quantity)) as TotalDeOrden from [Order Details]
     where orderid = 10250
+
+
+-- importe de ventas desde el inicio hasta hoy, 1957
+Select sum((Unitprice * Quantity) - (UnitPrice * Discount * Quantity)) as TotalDeOrden from [Order Details]
+
+-- cuanto se vendio de te chai
+Select sum((Unitprice * Quantity) - (UnitPrice * Discount * Quantity)) as TotalDeOrden from [Order Details]
+    where ProductID = 1
+
+--
+Select sum(([Order Details].Unitprice * Quantity) - ([Order Details].UnitPrice * Discount * Quantity)) as TotalDeOrden from [Order Details]
+    JOIN products on products.productid = [Order Details].productid
+    where categoryid = 1
+
+
+Select sum((od.Unitprice * Quantity) - (od.UnitPrice * Discount * Quantity)) as TotalDeOrden from [Order Details] od
+    JOIN products p on p.productid = od.productid
+    where categoryid = 1
+
+-- consulta para saber el id de categorias
+select Categoryid from Categories
+    where categoryname like '%beverages'
+
+Select sum((od.Unitprice * Quantity) - (od.UnitPrice * Discount * Quantity)) as TotalDeOrden from [Order Details] od
+    join products p on p.productid = od.productid
+    JOIN categories c on c.categoryid = p.categoryid
+    where c.categoryid = 1
+
+-- cuanto se vendio de bebidas en 1997
+Select sum((od.Unitprice * Quantity) - (od.UnitPrice * Discount * Quantity)) as TotalDeOrden from [Order Details] od
+    JOIN products p on p.productid = od.ProductID
+    JOIN categories c on c.categoryid = p.CategoryID
+    JOIN orders o on o.orderid = od.orderid
+    where categoryname like '%beverages'
+    and year(orderdate) = 1997
+
+-- saber el importe total en el 97 de cada categoria
+select c.CategoryName, sum((od.Unitprice * Quantity) - (od.UnitPrice * Discount * Quantity)) as Total from Orders o
+    JOIN [Order Details] od on o.OrderID = od.OrderID
+    JOIN Products p on od.ProductID = p.ProductID
+    JOIN Categories c on p.CategoryID = c.CategoryID
+    where year(o.OrderDate) = 1997
+    group by c.CategoryName;
+
+
+
+-- 26 marzo
+-- USALA PARA CONSULTAR EL NOMBRE DE LAS TABLASS
+SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES;
+
+
+--agregarlo con los nombres de los proveedores
+select DATENAME(MONTH, O.OrderDate), C.CategoryName, SUM(od.UnitPrice * od.Quantity * (1-od.Discount)) AS TotalSales 
+FROM [Order Details] od 
+JOIN Orders o on od.OrderID = o.OrderID
+JOIN Products P on od.ProductID = P.ProductID
+JOIN Categories c on c.CategoryID = c.CategoryID
+
+--JOIN Employees e on 
+WHERE YEAR(OrderDate) = 1997
+GROUP BY DATEPART (MONTH, o.OrderDate), DATENAME(MONTH, o.OrderDate), c.CategoryName  
+ORDER by DATEPART(MONTH, o.orderdate), TotalSales DESC;
+
+--DATEPART ORDENA POR EL NUMERO DEL MES
+SELECT C.CategoryName, DATENAME (month, O.OrderDate), SUM(QUANTITY * (1 - Discount) * OD.Unitprice) AS TotalVendido FROM [Order Details] OD
+    JOIN Orders O ON OD.OrderID = O.OrderID
+    JOIN Products P ON OD.ProductID = P.ProductID
+    JOIN Categories C ON P.CategoryID = C.CategoryID
+    WHERE YEAR(O.OrderDate) = 1997
+    GROUP BY C.CategoryName, DATEPART (month, O.OrderDate), DATENAME (month, O.OrderDate)
+    ORDER BY C.CategoryName, DATEPART (month, O.OrderDate) ASC;
+
+
+-- 27 marzo
+-- cuales ordenes de compra han sido menores de $500
+Select orderid, sum((Unitprice * Quantity) - (UnitPrice * Discount * Quantity)) as Importe
+from [Order Details]
+    Having sum((Unitprice * Quantity) - (UnitPrice * Discount * Quantity)) < 500
+    ORDER BY Importe
+ 
+
