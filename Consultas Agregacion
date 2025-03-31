@@ -128,3 +128,36 @@ from [Order Details]
     ORDER BY Importe
  
 
+
+
+
+
+
+
+-- 31 Marzo
+
+-- SUBCONSULTAS --
+
+-- Declarando variables
+declare @maximo money
+Select @maximo = max(Unitprice) from products
+Select productname from products
+    where unitprice = @maximo
+
+-- Todo en una consulta
+Select productname, unitprice from products
+    where unitprice = (select max(unitprice) from products)
+
+
+
+Select companyname from Customers
+    JOIN orders on orders.CustomerID = customers.CustomerID
+    WHERE orderdate > '1/1/1995'
+
+
+Select compayname, contactname from [Customers] C
+    where exists
+    (Select * from orders o
+    where c.customerid = o.customerid
+        and orderdate = '1/1/1990')
+
