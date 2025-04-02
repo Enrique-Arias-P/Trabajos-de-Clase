@@ -1,0 +1,27 @@
+use social
+----- 1 Abril
+-- 1
+
+-- 2
+
+----- 2 Abril
+-- 3
+select * from likes l1
+    join likes l2 on l1.id1 = l2.id1
+
+select * from likes l1
+    join likes l2 on l1.id2 = l2.id1
+    where l1.id1 = l2.id2
+
+
+select h1.name, h1.grade, h2.name, h2.grade from likes l1
+    join likes l2 on l1.id2 = l2.id1
+    join Highschooler h1 on h1.id = l1.ID1
+    join Highschooler h2 on h2.id = l1.id2
+    where l1.id1 = l2.id2
+        and l1.id1 < l1.id2
+
+
+-- 4
+
+-- 5
