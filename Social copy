@@ -1,8 +1,17 @@
 use social
 ----- 1 Abril
 -- 1
+select h1.name, h2.name from Highschooler h1
+    join Friend F on H1.ID = F.ID1
+    join Highschooler H2 on H2.ID = F.ID2
+    where h1.name = 'Gabriel'
 
 -- 2
+select * from Highschooler H1
+    join LIKES L ON L.ID1 = H1.ID
+    join Highschooler H2 ON L.ID2 = H2.ID
+    where H1.grade - 2 >= H2.grade
+
 
 ----- 2 Abril
 -- 3
@@ -24,4 +33,10 @@ select h1.name, h1.grade, h2.name, h2.grade from likes l1
 
 -- 4
 
+
 -- 5
+Select name, grade From Highschooler h1
+Where h1.ID not in (Select ID1 from Likes)
+AND h1.ID not in (Select ID2 from Likes)
+
+-
