@@ -1,0 +1,21 @@
+use northwind
+
+CREATE PROCEDURE dbo.mathtutor
+    @m1 smallint,
+    @m2 smallint,
+    @result smallint OUTPUT
+AS
+    SET @result = @m1 * @m2
+
+GO
+
+Declare @answer SMALLINT
+Execute mathtutor 5,6, @answer OUTPUT
+Select 'The result is: ', @answer
+
+
+Declare @answer SMALLINT
+Declare @f SMALLINT
+set @f = 8
+Execute mathtutor @f, @answer OUTPUT
+Select 'The result is: ', @answer
