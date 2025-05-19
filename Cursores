@@ -1,0 +1,79 @@
+use northwind
+go
+
+DECLARE empleados cursor for
+    select * from employees
+
+open empleados
+
+fetch next from empleados
+
+select @@FETCH_STATUS
+
+close empleados
+DEALLOCATE empleados
+
+
+-- Scroll
+DECLARE empleados2 cursor scroll for
+    select * from employees
+
+open empleados2
+
+fetch absolute 5 from empleados2
+
+select @@FETCH_STATUS
+
+close empleados2
+DEALLOCATE empleados2
+GO
+
+
+--recorre la tabla empleado
+CREATE PROCEDURE reporteOrdenes AS
+
+DECLARE empleados2 cursor scroll for
+    select EmployeeID from employees
+declare @eid int
+
+open empleados2
+
+fetch next from empleados2 into @eid
+
+while @@FETCH_STATUS = 0
+    BEGIN
+
+    fetch next from empleados into @eid
+    end
+
+close empleados2
+DEALLOCATE empleados2
+
+GO
+
+
+
+--Otro
+CREATE PROCEDURE reporteOrdenes
+AS
+
+DECLARE empleados2 cursor scroll for
+    select EmployeeID from employees
+declare @eid int
+
+open empleados2
+
+fetch next from empleados2 into @eid
+
+while @@FETCH_STATUS = 0
+    BEGIN
+
+    select count (*) from orders where EmployeeID = @eid
+    fetch next from empleados into @eid
+    end
+
+close empleados2
+DEALLOCATE empleados2
+GO
+
+
